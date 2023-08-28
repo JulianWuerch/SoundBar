@@ -59,7 +59,7 @@ An counter how long it has been alive for (ticks)
 A state if it is running or not  
 An integer variable to store values  
 An String array to store input varaibles (given in the terminal)  
-  
+
 Syntax:  
 tickToExecute # scriptCommand parameters
 tickToExecute terminalCommand parameters
@@ -85,3 +85,6 @@ tickToExecute terminalCommand parameters
 "addtick": adds to the tick value  
 "subtick": subtracts from the tick value  
 "sysout": prints the parameter  
+
+#### Script Parameter  
+To use variables in a script you can use %number%. This will be replaced with given parameters at the start of your script.
