@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Script {
     public String name;
     public String[] actions;
@@ -65,7 +66,11 @@ public class Script {
         if (task[0].startsWith("#")) {
             command(s);
         } else {
-            SoundBarMain.use(task[1]);
+            String toUse = "";
+            for (int i = 1; i < task.length; i++) {
+                toUse = task[i] + " ";
+            }
+            SoundBarMain.use(toUse);
         }
     }
 
@@ -86,17 +91,29 @@ public class Script {
             break;
             case "if": 
                 if (workVal == Integer.parseInt(task[2])) {
-                    eval(task[3].replace("§", " "));
+                    String toUse = "";
+                    for (int i = 3; i < task.length; i++) {
+                        toUse = task[i] + " ";
+                    }
+                    eval(toUse.replace("§", " "));
                 }
             break;
             case "smaler": 
                 if (workVal > Integer.parseInt(task[2])) {
-                    eval(task[3].replace("§", " "));
+                    String toUse = "";
+                    for (int i = 3; i < task.length; i++) {
+                        toUse = task[i] + " ";
+                    }
+                    eval(toUse.replace("§", " "));
                 }
             break;
             case "greater": 
                 if (workVal < Integer.parseInt(task[2])) {
-                    eval(task[3].replace("§", " "));
+                    String toUse = "";
+                    for (int i = 3; i < task.length; i++) {
+                        toUse = task[i] + " ";
+                    }
+                    eval(toUse.replace("§", " "));
                 }
             break;
             case "bitAnd": workVal = workVal & Integer.parseInt(task[2]);
@@ -119,7 +136,12 @@ public class Script {
             break;
             case "subtick": ticks -= Integer.parseInt(task[2]);
             break;
-            case "sysout": System.out.println(task[2]);
+            case "sysout": 
+                    String toUse = "";
+                    for (int i = 2; i < task.length; i++) {
+                        toUse = task[i] + " ";
+                    }
+                System.out.println(toUse);
             break;
         }
     }

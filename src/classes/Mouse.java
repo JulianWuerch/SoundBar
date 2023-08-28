@@ -117,6 +117,4 @@ public class Mouse implements MouseListener, MouseWheelListener {
         }
         Window.window.repaint();
     }
-
-    
 }

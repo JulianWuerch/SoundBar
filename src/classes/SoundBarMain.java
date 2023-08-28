@@ -19,8 +19,8 @@ public class SoundBarMain {
     public static BufferedImage[] uiElement;
     public static short standartFadeOutTime = 5;
     public static String srcPath = "";
-    public static String[] keyword = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "end", "setFPS", "setUpdateSeq", "replaceKeyword", "setSrcPath", "setStandardFadeTime"};
-    public static String[] KEYWORD = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "end", "setFPS", "setUpdateSeq", "replaceKeyword", "setSrcPath", "setStandardFadeTime"};
+    public static String[] keyword = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "setFPS", "setUpdateSeq", "replaceCommand", "setSrcPath", "setStandardFadeTime", "restard", "end"};
+    public static String[] KEYWORD = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "setFPS", "setUpdateSeq", "replaceCommand", "setSrcPath", "setStandardFadeTime", "restard", "end"};
     public static boolean runSetupScripts = true;
 
 
@@ -331,8 +331,6 @@ public class SoundBarMain {
                     }
                 }
             break;
-            case "end": System.exit(0);
-            break;
             case "setFPS":
                 FPS = Short.parseShort(order[1]);
                 updateSeq = FPS;
@@ -340,7 +338,7 @@ public class SoundBarMain {
             case "setUpdateSeq":
                 updateSeq = (Short.parseShort(order[1]));
             break;
-            case "replaceKeyword":
+            case "replaceCommand":
                 int indexer = 0;
                 for (String search : keyword) {
                     if (search.equals(order[1])) {
@@ -354,6 +352,12 @@ public class SoundBarMain {
             break;
             case "setStandardFadeTime":
                 standartFadeOutTime = Short.parseShort(order[1]);
+            break;
+            case "restard": 
+                setup();
+                Window.openWindow();
+            break;
+            case "end": System.exit(0);
             break;
             default: 
                 for (Script sc : scripts) {

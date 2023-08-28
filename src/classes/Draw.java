@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JLabel;
 
+
 public class Draw extends JLabel {
     public static int BOARDER_DIST = 5;
     public static int X = BOARDER_DIST * 2;
