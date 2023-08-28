@@ -10,7 +10,7 @@ folder/resources/sounds (Put all your music and soundeffects in this folder as *
   
 To use sound files in the UI they need a name starting with "Background".  
 
-## Useage    
+## Usage    
 ### UI  
 With the UI you can controll the shown tracks. 
 The UI is updated every second (controlled by the *FPS* and the *updateSeq* in the *SoundBarMain*-class).   
