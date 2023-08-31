@@ -107,6 +107,7 @@ public class Sound {
 		if (!loaded) {
 			load();
 		}
+		pause = 0;
 		clip.stop();
 	}
 
@@ -124,7 +125,8 @@ public class Sound {
 		if (delay != 0) {
 			state[5] = true;
 		}
-		this.delay = delay;
+		this.delay = delay * SoundBarMain.FPS;
+		pause = 0;
 		clip.stop();
 	}
 
@@ -133,6 +135,7 @@ public class Sound {
 			load();
 		}
 		clip.setFramePosition(0);
+		pause = 0;
 	}
 
 	public void pauseFade(short target, short time) {
@@ -161,7 +164,7 @@ public class Sound {
 			clip.start();
 		}
 
-		this.pause = pause;
+		this.pause = pause * SoundBarMain.FPS;
 		p = pause;
 	}
 
@@ -169,28 +172,28 @@ public class Sound {
 		if (!loaded) {
 			load();
 		}
-		this.pause = delay;
+		this.pause = delay * SoundBarMain.FPS;
 	}
 
 	public void addRePause(short delay) {
 		if (!loaded) {
 			load();
 		}
-		this.pause += delay;
+		this.pause += delay * SoundBarMain.FPS;
 	}
 
 	public void setDelay(short delay) {
 		if (!loaded) {
 			load();
 		}
-		this.delay = delay;
+		this.delay = delay * SoundBarMain.FPS;
 	}
 
 	public void addDelay(short delay) {
 		if (!loaded) {
 			load();
 		}
-		this.delay += delay;
+		this.delay += delay * SoundBarMain.FPS;
 	}
 
 	public void tick() {

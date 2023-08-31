@@ -63,6 +63,9 @@ public class SoundBarMain {
 
         switch (order[0]) {
             case "window":
+                if (Window.window != null) {
+                    Window.window.dispose();
+                }
                 Window.openWindow();
             break;
             case "start":

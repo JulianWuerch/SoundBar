@@ -12,7 +12,21 @@ To use sound files in the UI they need a name starting with "Background".
 
 ## Usage    
 ### UI  
-With the UI you can controll the shown tracks. 
+With the UI you can controll the shown tracks.
+
+#### Flowcontroll:  
+![](src/images/FadeIn.png) You can fade in tracks when nothing else is playing.  
+![](src/images/InRow.png) You can set one track into a que. It will automaticly play if the previous track stops.  
+![](src/images/FadeOut.png) Fades the active track out and stops it.  
+![](src/images/CrossFade.png) This fades the active track out and the new track in.  
+![](src/images/Repeat.png) When activated the playing track repeats after finishing.  
+![](src/images/Stop.png) This pauses the track. The track gets faded out but it is still counted as active.  
+
+#### Timeline:  
+To jump to a certain point in a track you can click on the gray rectangle of the track in question.  
+To reset a track you can use the green button.  
+To set a track to its end you can press the red button.  
+  
 The UI is updated every second (controlled by the *FPS* and the *updateSeq* in the *SoundBarMain*-class).   
   
 ### Terminal    
