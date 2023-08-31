@@ -374,7 +374,7 @@ public class SoundBarMain {
     public static void setup() {
         File f = new File("src/images");
         if (f.exists()) {
-            String[] fileNames = f.list();
+            String[] fileNames = {"CrossFade.png", "Repeat.png", "FadeIn.png", "FadeOut.png", "InRow.png", "Stop.png"};
             uiElement = new BufferedImage[fileNames.length];
             for (int i = 0; i < fileNames.length; i++) {
                 try {

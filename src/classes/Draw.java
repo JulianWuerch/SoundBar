@@ -39,7 +39,6 @@ public class Draw extends JLabel {
             g.setColor(Color.BLACK);
             g.drawRect(x + boarderDist, y + h  - boarderDist - h / 3, w / 2, h / 3);
             
-
             //Images 1:CrossFade 2:Repeat 3:FadeIn 4:FadeOut 5:InRow 6:Stop
             if (SoundBarMain.playingBackground == m.index) {
                 g.drawImage(SoundBarMain.uiElement[3], x + w - (h + boarderDist) * 3, y + boarderDist, h - boarderDist * 2, h - boarderDist * 2, null);
