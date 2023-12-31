@@ -23,7 +23,6 @@ public class Sound {
 	public boolean[] state = new boolean[6];
 	public boolean loaded = false, autoRep = false, backgroundFading = false;
 	public int min = -50, max = 1; //control.getMinimum()
-	private SmallTimer timer;
 	
 	public Sound(String name, int ind) {
 		this.name = name;
@@ -31,9 +30,6 @@ public class Sound {
 		if (SoundBarMain.preload) {
 			load();
 		}
-		this.timer = new SmallTimer();
-		this.timer.sound = this;
-		this.timer.start();
 	}
 
 	public void load() {
@@ -140,8 +136,16 @@ public class Sound {
 			return;
 		}
 		loaded = false;
-		clip.setFramePosition(0);
+		if (SoundBarMain.playingBackground == index) {
+			SoundBarMain.playingBackground = -1;
+		}
+		if (SoundBarMain.fadeToBackground != -1) {
+			SoundBarMain.use("fade " + SoundBarMain.sounds[SoundBarMain.fadeToBackground].name + " 1 " + SoundBarMain.standartFadeOutTime);
+			SoundBarMain.playingBackground = SoundBarMain.fadeToBackground;
+			SoundBarMain.fadeToBackground = -1;
+		}
 		clip.stop();
+		clip.setFramePosition(0);
 		clip.flush();
 		clip.close();
 		clip.drain();

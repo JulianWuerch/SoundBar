@@ -172,41 +172,20 @@ public class SoundBarMain {
                 }
             break;
             case "res":
-                //int indexrunner = 0;
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
-                        //found = true;
                         so.reset();
-                        //String name = sounds[indexrunner].name;
-                        //int id = sounds[indexrunner].index;
-                        //sounds[indexrunner] = null;
-                        //System.gc();
-                        //sounds[indexrunner] = new Sound(name, id);
-                        //System.out.println("garbage " + sounds[indexrunner].clip);
-                        //break;
+                        System.gc();
                         return;
                     }
-                    //indexrunner++;
                 }
-                //if (found) {
-                //    break;
-                //}
-                //indexrunner = 0;
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.reset();
-                        //String name = sounds[indexrunner].name;
-                        //int id = sounds[indexrunner].index;
-                        //sounds[indexrunner] = null;
-                        //System.gc();
-                        //sounds[indexrunner] = new Sound(name, id);
-                        //System.out.println("garbage " + sounds[indexrunner].clip);
-                        //break;
+                        System.gc();
                         return;
                     }
-                    //indexrunner++;
                 }
-                //System.gc();
             break;
             case "repeat": 
                 for (Sound so : sounds) {
