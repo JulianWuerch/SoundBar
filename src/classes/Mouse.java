@@ -43,22 +43,22 @@ public class Mouse implements MouseListener, MouseWheelListener {
         } else if (x > w - (h + Draw.boarderDist) * 3 && x < w - (h + Draw.boarderDist) * 2 && y > Draw.boarderDist && y < h - Draw.boarderDist) {
             
             if (SoundBarMain.playingBackground == index) {
-                SoundBarMain.use("stopfade " + SoundBarMain.sounds[index].name + " 5");
+                SoundBarMain.use("stopfade " + SoundBarMain.sounds[index].name + " " + SoundBarMain.standartFadeOutTime);
                 SoundBarMain.playingBackground = -1;
                 if (SoundBarMain.fadeToBackground != -1) {
-                    SoundBarMain.use("fade " + SoundBarMain.sounds[SoundBarMain.fadeToBackground].name + " 1 5");
+                    SoundBarMain.use("fade " + SoundBarMain.sounds[SoundBarMain.fadeToBackground].name + " 1 " + SoundBarMain.standartFadeOutTime);
                     SoundBarMain.playingBackground = SoundBarMain.fadeToBackground;
                     SoundBarMain.fadeToBackground = -1;
                 }
 
             } else if (SoundBarMain.playingBackground == -1) {
 
-                SoundBarMain.use("start " + SoundBarMain.sounds[index].name + " 1 5");
+                SoundBarMain.use("start " + SoundBarMain.sounds[index].name + " 1 " + SoundBarMain.standartFadeOutTime);
                 SoundBarMain.playingBackground = index;
 
             } else {
-                SoundBarMain.use("stopfade " + SoundBarMain.sounds[SoundBarMain.playingBackground].name + " 5");
-                SoundBarMain.use("fade " + SoundBarMain.sounds[index].name + " 1 5");
+                SoundBarMain.use("stopfade " + SoundBarMain.sounds[SoundBarMain.playingBackground].name + " " + SoundBarMain.standartFadeOutTime);
+                SoundBarMain.use("fade " + SoundBarMain.sounds[index].name + " 1 " + SoundBarMain.standartFadeOutTime);
                 SoundBarMain.playingBackground = index;
                 if (SoundBarMain.playingBackground == SoundBarMain.fadeToBackground) {
                     SoundBarMain.fadeToBackground = -1;
@@ -79,9 +79,9 @@ public class Mouse implements MouseListener, MouseWheelListener {
             if (SoundBarMain.playingBackground == index) {
                 if (SoundBarMain.sounds[index].clip != null) {
                     if (SoundBarMain.sounds[index].clip.isRunning()) {
-                        SoundBarMain.use("stopfade " + SoundBarMain.sounds[index].name + " 5");
+                        SoundBarMain.use("stopfade " + SoundBarMain.sounds[index].name + " " + SoundBarMain.standartFadeOutTime);
                     } else {
-                        SoundBarMain.use("fade " + SoundBarMain.sounds[index].name + " 1 5");
+                        SoundBarMain.use("fade " + SoundBarMain.sounds[index].name + " 1 " + SoundBarMain.standartFadeOutTime);
                     }
                 }
             }

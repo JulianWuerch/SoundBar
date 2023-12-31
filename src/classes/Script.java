@@ -141,7 +141,7 @@ public class Script {
                     for (int i = 2; i < task.length; i++) {
                         toUse = task[i] + " ";
                     }
-                System.out.println(toUse);
+                System.out.println("ToUse: " + toUse);
             break;
         }
     }

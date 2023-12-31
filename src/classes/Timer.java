@@ -23,7 +23,9 @@ public class Timer extends Thread {
             s.tick();
         }
         for (Sound s : SoundBarMain.sounds) {
-            s.tick();
+            if (s != null) {
+                s.tick();
+            }
         }
         
         if (t == 0) {

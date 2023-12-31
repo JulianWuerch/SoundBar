@@ -17,11 +17,12 @@ public class SoundBarMain {
     public static int playingBackground = -1, fadeToBackground = -1;
     public static int scroll = 0, scrollMulti = 8;
     public static BufferedImage[] uiElement;
-    public static short standartFadeOutTime = 5;
+    public static short standartFadeOutTime = 3;
     public static String srcPath = "";
     public static String[] keyword = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "setFPS", "setUpdateSeq", "replaceCommand", "setSrcPath", "setStandardFadeTime", "restard", "end"};
     public static String[] KEYWORD = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "setFPS", "setUpdateSeq", "replaceCommand", "setSrcPath", "setStandardFadeTime", "restard", "end"};
     public static boolean runSetupScripts = true;
+    public static int maxSoundsToRead = 40;
 
 
     public static void main(String[] args) throws Exception {
@@ -38,6 +39,7 @@ public class SoundBarMain {
     }
 
     public static void use(String s) {
+        System.out.println(s);
         String[] order = s.split(" ");
         if (order.length < 4) {
             String[] or = new String[4];
@@ -170,22 +172,41 @@ public class SoundBarMain {
                 }
             break;
             case "res":
+                //int indexrunner = 0;
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
+                        //found = true;
                         so.reset();
-                        found = true;
-                        break;
+                        //String name = sounds[indexrunner].name;
+                        //int id = sounds[indexrunner].index;
+                        //sounds[indexrunner] = null;
+                        //System.gc();
+                        //sounds[indexrunner] = new Sound(name, id);
+                        //System.out.println("garbage " + sounds[indexrunner].clip);
+                        //break;
+                        return;
                     }
+                    //indexrunner++;
                 }
-                if (found) {
-                    break;
-                }
+                //if (found) {
+                //    break;
+                //}
+                //indexrunner = 0;
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.reset();
-                        break;
+                        //String name = sounds[indexrunner].name;
+                        //int id = sounds[indexrunner].index;
+                        //sounds[indexrunner] = null;
+                        //System.gc();
+                        //sounds[indexrunner] = new Sound(name, id);
+                        //System.out.println("garbage " + sounds[indexrunner].clip);
+                        //break;
+                        return;
                     }
+                    //indexrunner++;
                 }
+                //System.gc();
             break;
             case "repeat": 
                 for (Sound so : sounds) {
@@ -396,8 +417,10 @@ public class SoundBarMain {
         if (file.exists()) {
             ArrayList<Integer> backs = new ArrayList<>();
             String[] fileNames = file.list();
-            sounds = new Sound[fileNames.length];
-            for (int i = 0; i < fileNames.length; i++) {
+            int countToLoad = Math.min(fileNames.length, maxSoundsToRead);
+
+            sounds = new Sound[countToLoad];
+            for (int i = 0; i < countToLoad; i++) {
                 if (fileNames[i].startsWith("Background")) {
                     backs.add(i);
                 }

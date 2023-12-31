@@ -23,6 +23,7 @@ public class Sound {
 	public boolean[] state = new boolean[6];
 	public boolean loaded = false, autoRep = false, backgroundFading = false;
 	public int min = -50, max = 1; //control.getMinimum()
+	private SmallTimer timer;
 	
 	public Sound(String name, int ind) {
 		this.name = name;
@@ -30,6 +31,9 @@ public class Sound {
 		if (SoundBarMain.preload) {
 			load();
 		}
+		this.timer = new SmallTimer();
+		this.timer.sound = this;
+		this.timer.start();
 	}
 
 	public void load() {
@@ -46,6 +50,7 @@ public class Sound {
 			valRatio = (control.getMaximum() - control.getMinimum());
 			valOff = control.getMinimum();
 			loaded = true;
+			audioStream.close();
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 			e.printStackTrace();
 		}
@@ -132,9 +137,16 @@ public class Sound {
 
 	public void reset() {
 		if (!loaded) {
-			load();
+			return;
 		}
+		loaded = false;
 		clip.setFramePosition(0);
+		clip.stop();
+		clip.flush();
+		clip.close();
+		clip.drain();
+		clip = null;
+		System.out.println("Reset " + name + " " + clip);
 		pause = 0;
 	}
 

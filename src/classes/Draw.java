@@ -47,7 +47,7 @@ public class Draw extends JLabel {
                     g.fillRect(x + w - (h + boarderDist) * 2, y + boarderDist, h - boarderDist * 2, h - boarderDist * 2);
                 }
                 g.drawImage(SoundBarMain.uiElement[1], x + w - (h + boarderDist) * 2, y + boarderDist, h - boarderDist * 2, h - boarderDist * 2, null);
-                if (!SoundBarMain.sounds[SoundBarMain.playingBackground].clip.isRunning()) {
+                if (SoundBarMain.sounds[SoundBarMain.playingBackground].loaded && !SoundBarMain.sounds[SoundBarMain.playingBackground].clip.isRunning()) {
                     g.setColor(Color.YELLOW);
                     g.fillRect(x + w - (h + boarderDist), y + boarderDist, h - boarderDist * 2, h - boarderDist * 2);
                 }
