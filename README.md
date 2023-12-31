@@ -75,7 +75,7 @@ An integer variable to store values
 An String array to store input varaibles (given in the terminal)  
 
 Syntax:  
-tickToExecute # scriptCommand parameters
+tickToExecute # scriptCommand parameters  
 tickToExecute terminalCommand parameters
   
 #### Script Commands  
