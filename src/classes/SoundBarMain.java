@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 
 public class SoundBarMain {
-    public static boolean running = true, preload = false, backgroundRepeat = false;
+    public static boolean running = true, preload = false, backgroundRepeat = false, backgroundCascade = true;
     public static Sound[] sounds;
     public static Script[] scripts;
     public static short FPS = 10, updateSeq = FPS;
@@ -53,7 +53,6 @@ public class SoundBarMain {
             order = or;
         }
         
-        boolean found = false;
 
         int ind = 0;
         for (String test : keyword) {
@@ -80,13 +79,10 @@ public class SoundBarMain {
                             so.start();
                             so.fade(Float.parseFloat(order[2]), Short.parseShort(order[3]));
                         }
-                        found = true;
-                        break;
+                        return;
                     }
                 }
-                if (found) {
-                    break;
-                }
+
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         if (order.length < 4) {
@@ -95,7 +91,7 @@ public class SoundBarMain {
                         } else {
                             so.fade(Float.parseFloat(order[2]), Short.parseShort(order[3]));
                         }
-                        break;
+                        return;
                     }
                 }
             break;
@@ -103,17 +99,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.fade(Float.parseFloat(order[2]), Short.parseShort(order[3]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.fade(Float.parseFloat(order[2]), Short.parseShort(order[3]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -121,17 +113,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.stop();
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.stop();
-                        break;
+                        return;
                     }
                 }
             break;
@@ -139,17 +127,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.pause(Short.parseShort(order[2]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.pause(Short.parseShort(order[2]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -157,17 +141,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.run();
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.run();
-                        break;
+                        return;
                     }
                 }
             break;
@@ -191,17 +171,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.repeat(Short.parseShort(order[2]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.repeat(Short.parseShort(order[2]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -209,17 +185,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.pauseFade(Short.parseShort(order[2]), Short.parseShort(order[3]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.pauseFade(Short.parseShort(order[2]), Short.parseShort(order[3]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -227,17 +199,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.stFade(Short.parseShort(order[2]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.stFade(Short.parseShort(order[2]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -245,17 +213,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.setRePause(Short.parseShort(order[2]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.setRePause(Short.parseShort(order[2]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -263,17 +227,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.addRePause(Short.parseShort(order[2]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.addRePause(Short.parseShort(order[2]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -281,17 +241,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.setDelay(Short.parseShort(order[2]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.setDelay(Short.parseShort(order[2]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -299,17 +255,13 @@ public class SoundBarMain {
                 for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.addDelay(Short.parseShort(order[2]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.addDelay(Short.parseShort(order[2]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -320,17 +272,13 @@ public class SoundBarMain {
                  for (Sound so : sounds) {
                     if (so.name.equals(order[1])) {
                         so.setAutoRep(Boolean.parseBoolean(order[2]));
-                        found = true;
-                        break;
+                        return;
                     }
-                }
-                if (found) {
-                    break;
                 }
                 for (Sound so : sounds) {
                     if (so.name.startsWith(order[1])) {
                         so.setAutoRep(Boolean.parseBoolean(order[2]));
-                        break;
+                        return;
                     }
                 }
             break;
@@ -346,6 +294,7 @@ public class SoundBarMain {
                 for (String search : keyword) {
                     if (search.equals(order[1])) {
                         keyword[indexer] = order[2];
+                        return;
                     }
                     indexer++;
                 }
@@ -366,7 +315,7 @@ public class SoundBarMain {
                 for (Script sc : scripts) {
                     if (sc.name.equals(order[0] + ".txt")) {
                         sc.run(order);
-                        break;
+                        return;
                     }
                 }
                 System.out.println("SoundMain.use: No script found. exeting  [X]");

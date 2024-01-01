@@ -136,6 +136,13 @@ public class Sound {
 			return;
 		}
 		loaded = false;
+		
+		if (SoundBarMain.backgroundCascade && SoundBarMain.fadeToBackground == -1) {
+			if (SoundBarMain.backgrounds.length > SoundBarMain.playingBackground + 1) {
+				SoundBarMain.fadeToBackground = SoundBarMain.playingBackground + 1;
+			}
+		}
+
 		if (SoundBarMain.playingBackground == index) {
 			SoundBarMain.playingBackground = -1;
 		}
@@ -146,9 +153,7 @@ public class Sound {
 		}
 		clip.stop();
 		clip.setFramePosition(0);
-		clip.flush();
 		clip.close();
-		clip.drain();
 		clip = null;
 		System.out.println("Reset " + name + " " + clip);
 		pause = 0;
@@ -293,20 +298,13 @@ public class Sound {
 				}
 			}
 			
-
 			if (clip.getFramePosition() >= clip.getFrameLength()) {
 				if (SoundBarMain.playingBackground == index) {
 					if (SoundBarMain.backgroundRepeat) {
 						clip.setFramePosition(0);
 						clip.start();
 					} else {
-						if (SoundBarMain.fadeToBackground != -1) {
-							SoundBarMain.use("Sound.tick: starting " + SoundBarMain.sounds[SoundBarMain.fadeToBackground].name + " 1 5 [I]");
-							SoundBarMain.playingBackground = SoundBarMain.fadeToBackground;
-							SoundBarMain.fadeToBackground = -1;
-						} else {
-							SoundBarMain.playingBackground = -1;
-						}
+						reset();
 					}
 				} else if (autoRep) {
 					clip.setFramePosition(0);
