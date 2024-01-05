@@ -26,7 +26,21 @@ public class Draw extends JLabel {
             SoundBarMain.changeFlag = false;
         }
         g.drawImage(imageBuffer, 0, 0, null);
+    }
 
+    public void updateProgressBar(int sound) {
+        if (sound < 0 || sound >= SoundBarMain.sounds.length) {
+            return;
+        }
+
+        Graphics g = imageBuffer.getGraphics();
+        g.setColor(Color.DARK_GRAY);
+        Sound s = SoundBarMain.sounds[sound];
+        w = Window.draw.getWidth() - boarderDist * 4;
+        y = boarderDist * 2 + SoundBarMain.scroll + (h + boarderDist) * sound;
+        if (s.clip != null) {
+                g.fillRect(x + boarderDist + w / 10, y + h - boarderDist - h / 3, (int) ((float) ((float) s.clip.getFramePosition() / (float) s.clip.getFrameLength()) * (float) (w / 2 - w / 5)), h / 3);
+        }
     }
 
     public void redrawImageBuffer() {

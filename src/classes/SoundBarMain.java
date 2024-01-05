@@ -11,10 +11,10 @@ public class SoundBarMain {
     public static boolean running = true, preload = false, backgroundRepeat = false, backgroundCascade = true;
     public static Sound[] sounds;
     public static Script[] scripts;
-    public static short FPS = 10, updateSeq = FPS;
+    public static short FPS = 10, updateSeq = FPS, forceUpdate = 10;
     public static Timer timer;
     public static BackgroundMusic[] backgrounds;
-    public static int playingBackground = -1, fadeToBackground = -1;
+    public static int playingBackground = -1, fadeToBackground = -1, softNext = -1;
     public static int scroll = 0, scrollMulti = 8;
     public static BufferedImage[] uiElement;
     public static short standartFadeOutTime = 3;
@@ -321,6 +321,22 @@ public class SoundBarMain {
                 }
                 System.out.println("SoundMain.use: No script found. exeting  [X]");
             break;
+        }
+    }
+
+    public static void playNext() {
+        
+        if (fadeToBackground == -1 && softNext != -1) {
+            fadeToBackground = softNext;
+            softNext = -1;
+        }
+        if (fadeToBackground == -1 && backgroundCascade) {
+            fadeToBackground = (playingBackground + 1) % backgrounds.length; 
+        }
+        if (fadeToBackground != -1) {
+            use("fade " + sounds[fadeToBackground].name + " 1 " + standartFadeOutTime);
+			playingBackground = fadeToBackground;
+			fadeToBackground = -1;
         }
     }
 

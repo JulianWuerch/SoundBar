@@ -2,7 +2,7 @@ package classes;
 
 
 public class Timer extends Thread {
-    private int t = 0;
+    private int t = 0, tt = 0;
     public void run() {
         loop();
     }
@@ -36,7 +36,13 @@ public class Timer extends Thread {
 
     public void updateView() {
         if (Window.window != null) {
+            if (tt == 0) {
+                SoundBarMain.changeFlag = true;
+            } else {
+                Window.draw.updateProgressBar(SoundBarMain.playingBackground);
+            }
             Window.window.repaint();
+            tt = (tt + 1) % SoundBarMain.forceUpdate;
         }
     }
 }

@@ -50,6 +50,7 @@ public class Sound {
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Loaded: " + name);
 	}
 
 	public void setAutoRep(boolean set) {
@@ -62,6 +63,7 @@ public class Sound {
 		}
 		if (!clip.isRunning()) {
 			clip.start();
+			SoundBarMain.changeFlag = true;
 		}
 		if (control.getValue() < min) {
 			control.setValue(min);
@@ -88,6 +90,7 @@ public class Sound {
 		if (time == 0) {
 			control.setValue(control.getMinimum());
 			clip.stop();
+			SoundBarMain.changeFlag = true;
 		} else {
 			int fadeLen = (time * SoundBarMain.FPS);
 			stRatio = (float) (control.getValue() + min) / (float) fadeLen;
@@ -102,6 +105,7 @@ public class Sound {
 		}
 		clip.setFramePosition(0);
 		clip.start();
+		SoundBarMain.changeFlag = true;
 	}
 
 	public void stop() {
@@ -110,6 +114,7 @@ public class Sound {
 		}
 		pause = 0;
 		clip.stop();
+		SoundBarMain.changeFlag = true;
 	}
 
 	public void run() {
@@ -117,6 +122,7 @@ public class Sound {
 			load();
 		}
 		clip.start();
+		SoundBarMain.changeFlag = true;
 	}
 
 	public void pause(short delay) {
@@ -129,6 +135,7 @@ public class Sound {
 		this.delay = delay * SoundBarMain.FPS;
 		pause = 0;
 		clip.stop();
+		SoundBarMain.changeFlag = true;
 	}
 
 	public void reset() {
@@ -137,26 +144,20 @@ public class Sound {
 		}
 		loaded = false;
 		
-		if (SoundBarMain.backgroundCascade && SoundBarMain.fadeToBackground == -1) {
-			if (SoundBarMain.backgrounds.length > SoundBarMain.playingBackground + 1) {
-				SoundBarMain.fadeToBackground = SoundBarMain.playingBackground + 1;
-			}
-		}
+		SoundBarMain.softNext = (index + 1) % SoundBarMain.backgrounds.length;
+
+		SoundBarMain.playNext();
 
 		if (SoundBarMain.playingBackground == index) {
 			SoundBarMain.playingBackground = -1;
-		}
-		if (SoundBarMain.fadeToBackground != -1) {
-			SoundBarMain.use("fade " + SoundBarMain.sounds[SoundBarMain.fadeToBackground].name + " 1 " + SoundBarMain.standartFadeOutTime);
-			SoundBarMain.playingBackground = SoundBarMain.fadeToBackground;
-			SoundBarMain.fadeToBackground = -1;
 		}
 		clip.stop();
 		clip.setFramePosition(0);
 		clip.close();
 		clip = null;
-		System.out.println("Reset " + name + " " + clip);
 		pause = 0;
+		SoundBarMain.changeFlag = true;
+		System.out.println("Reset " + name + " " + clip);
 	}
 
 	public void pauseFade(short target, short time) {
@@ -183,6 +184,7 @@ public class Sound {
 		}
 		if (!clip.isRunning()) {
 			clip.start();
+			SoundBarMain.changeFlag = true;
 		}
 
 		this.pause = pause * SoundBarMain.FPS;
@@ -276,6 +278,7 @@ public class Sound {
 					vol = min;
 					clip.stop();
 					state[4] = false;
+					SoundBarMain.changeFlag = true;
 				}
 				control.setValue(vol);
 			} 
@@ -285,6 +288,7 @@ public class Sound {
 				} else {
 					clip.start();
 					state[5] = false;
+					SoundBarMain.changeFlag = true;
 				}
 			}
 	
@@ -293,6 +297,7 @@ public class Sound {
 					clip.setFramePosition(0);
 					clip.start();
 					p = pause;
+					SoundBarMain.changeFlag = true;
 				} else {
 					p--;
 				}
@@ -303,12 +308,14 @@ public class Sound {
 					if (SoundBarMain.backgroundRepeat) {
 						clip.setFramePosition(0);
 						clip.start();
+						SoundBarMain.changeFlag = true;
 					} else {
 						reset();
 					}
 				} else if (autoRep) {
 					clip.setFramePosition(0);
 					clip.start();
+					SoundBarMain.changeFlag = true;
 				}
 			}
 		}
