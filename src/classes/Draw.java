@@ -2,6 +2,8 @@ package classes;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 import javax.swing.JLabel;
 
 
@@ -16,8 +18,22 @@ public class Draw extends JLabel {
     public static int y = 0;
     public static int w = 0;
     public static int h = 50;
+    public static BufferedImage imageBuffer = new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR);
 
     public void paintComponent(Graphics g) {
+        if (SoundBarMain.changeFlag) {
+            redrawImageBuffer();
+            SoundBarMain.changeFlag = false;
+        }
+        g.drawImage(imageBuffer, 0, 0, null);
+
+    }
+
+    public void redrawImageBuffer() {
+
+        BufferedImage newImageBuffer = new BufferedImage(Window.draw.getWidth(), Window.draw.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics g = newImageBuffer.getGraphics();
+
         w = Window.draw.getWidth() - boarderDist * 4;
         y = boarderDist * 2 + SoundBarMain.scroll;
         g.setColor(Color.gray);
@@ -72,5 +88,7 @@ public class Draw extends JLabel {
 
             y += h + boarderDist;
         }
+
+        imageBuffer = newImageBuffer;
     }
 }

@@ -19,9 +19,11 @@ public class Mouse implements MouseListener, MouseWheelListener {
         int h = Draw.h;
         
         if ((e.getY() - SoundBarMain.scroll - Draw.boarderDist * 2) / (Draw.h + Draw.boarderDist) >= SoundBarMain.backgrounds.length) {
+            SoundBarMain.changeFlag = true;
             Window.window.repaint();
             return;
         }
+
         int index = SoundBarMain.backgrounds[(e.getY() - SoundBarMain.scroll - Draw.boarderDist * 2) / (Draw.h + Draw.boarderDist)].index;
         if (x > 0 && x < w / 10 && y > h - Draw.boarderDist - h / 3 && y < h - Draw.boarderDist) {
             
@@ -86,6 +88,7 @@ public class Mouse implements MouseListener, MouseWheelListener {
                 }
             }
         }
+        SoundBarMain.changeFlag = true;
         Window.window.repaint();
     }
 
@@ -115,6 +118,7 @@ public class Mouse implements MouseListener, MouseWheelListener {
         if (SoundBarMain.scroll > 0) {
             SoundBarMain.scroll = 0;
         }
+        SoundBarMain.changeFlag = true;
         Window.window.repaint();
     }
 }

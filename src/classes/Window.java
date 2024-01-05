@@ -3,6 +3,7 @@ package classes;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
 import javax.swing.JFrame;
 
 
@@ -12,7 +13,8 @@ public class Window {
     public static Draw draw;
 
     public static void openWindow() {
-        window = new JFrame("Background Music");
+        window = new JFrame("Background Music");        
+        window.setIconImage(SoundBarMain.uiElement[6]);
         draw = new Draw();
         draw.setPreferredSize(new Dimension(400, 200));
         draw.addMouseListener(new Mouse());

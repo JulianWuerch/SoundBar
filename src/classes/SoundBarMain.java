@@ -23,6 +23,7 @@ public class SoundBarMain {
     public static String[] KEYWORD = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "setFPS", "setUpdateSeq", "replaceCommand", "setSrcPath", "setStandardFadeTime", "restard", "end"};
     public static boolean runSetupScripts = true;
     public static int maxSoundsToRead = 40;
+    public static boolean changeFlag = true;
 
 
     public static void main(String[] args) throws Exception {
@@ -326,7 +327,7 @@ public class SoundBarMain {
     public static void setup() {
         File f = new File("src/images");
         if (f.exists()) {
-            String[] fileNames = {"CrossFade.png", "Repeat.png", "FadeIn.png", "FadeOut.png", "InRow.png", "Stop.png"};
+            String[] fileNames = {"CrossFade.png", "Repeat.png", "FadeIn.png", "FadeOut.png", "InRow.png", "Stop.png", "Icon.png"};
             uiElement = new BufferedImage[fileNames.length];
             for (int i = 0; i < fileNames.length; i++) {
                 try {
