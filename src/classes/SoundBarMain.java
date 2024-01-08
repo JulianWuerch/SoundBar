@@ -17,7 +17,7 @@ public class SoundBarMain {
     public static int playingBackground = -1, fadeToBackground = -1, softNext = -1;
     public static int scroll = 0, scrollMulti = 8;
     public static BufferedImage[] uiElement;
-    public static short standartFadeOutTime = 3;
+    public static short standartFadeOutTime = 8;
     public static String srcPath = "";
     public static String[] keyword = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "setFPS", "setUpdateSeq", "replaceCommand", "setSrcPath", "setStandardFadeTime", "restard", "end"};
     public static String[] KEYWORD = {"window", "start", "fade", "stop", "pause", "run", "res", "repeat", "spfade", "stopfade", "setRePa", "addRePa", "setDel", "addDel", "autoRep", "setFPS", "setUpdateSeq", "replaceCommand", "setSrcPath", "setStandardFadeTime", "restard", "end"};
